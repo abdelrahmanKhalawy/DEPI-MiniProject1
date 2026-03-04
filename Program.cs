@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using StudentManagementSystem.Models;
+﻿using StudentManagementSystem.Models;
 
 class Program
 {
@@ -57,7 +53,7 @@ class Program
 
                     case 4:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\nApplication Stopped.");
+                        Console.WriteLine("\nApplication Stopped Successfully.");
                         Console.ResetColor();
                         return;
 
@@ -89,9 +85,7 @@ class Program
                 {
                     if (inputAge <= 5)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Age must be higher than 5 years old. Please try again.");
-                        Console.ResetColor();
+                        ShowError("Age must be higher than 5 years old. Please try again.");
                         continue;
                     }
                     else
@@ -99,9 +93,7 @@ class Program
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("invalid age input. Please try again");
-                    Console.ResetColor();
+                    ShowError("invalid age input. Please try again");
                     continue;
                 }
             }
@@ -113,9 +105,7 @@ class Program
                 {
                     if (grade < 0 || grade > 100)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Grade Can Be between 0 and 100! Please try again.");
-                        Console.ResetColor();
+                        ShowError("Grade Can Be between 0 and 100! Please try again.");
                         continue;
                     }
                     else
@@ -123,9 +113,7 @@ class Program
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("invalid grade input. Please try again");
-                    Console.ResetColor();
+                    ShowError("invalid grade input. Please try again");
                     continue;
                 }
             }
@@ -137,9 +125,7 @@ class Program
         }
         else
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Invalid name input. Please try again.");
-            Console.ResetColor();
+            ShowError("Invalid name input. Please try again.");
         }
     }
     public static void ShowStudent(List<Student> studentslist)
@@ -156,7 +142,9 @@ class Program
 
         foreach (Student s in studentslist)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             s.PrintInfo();
+            Console.ResetColor();
             Console.WriteLine("-----------------------------------");
         }
     }
@@ -165,9 +153,7 @@ class Program
     {
         if (studentslist.Count() == 0)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("No students are available to delete");
-            Console.ResetColor();
+            ShowError("No students are available to delete");
             return;
         }
         string? name;
@@ -188,17 +174,13 @@ class Program
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Name not found. Please try again.");
-                    Console.ResetColor();
+                    ShowError("Name not found. Please try again.");
                     continue;
                 }
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid input");
-                Console.ResetColor();
+                ShowError("Invalid input");
                 continue;
             }
         }
