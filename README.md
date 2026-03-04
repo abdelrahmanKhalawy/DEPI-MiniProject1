@@ -114,8 +114,8 @@ using a Stored Procedure.
 <h2>👥 Team Members</h2>
 
 <ul>
-  <li><strong>Mariam</strong> – Database</li>
-  <li><strong>Shahd</strong> – Connection</li>
+  <li><strong>Shahd</strong> – Database</li>
+  <li><strong>Mariam</strong> – Connection</li>
   <li><strong>Abdelrahman</strong> – C# Development - Student Class</li>
   <li><strong>Baher</strong> – C# Development - Menu + Conditions + Loops</li>
   <li><strong>Naglaa</strong> – C# Development - Logic</li>
