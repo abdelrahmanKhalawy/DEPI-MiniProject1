@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using StudentManagementSystem.Models;
 
@@ -18,34 +19,22 @@ class Program
             Console.Write("Choose:");
             if (int.TryParse(Console.ReadLine(), out int choice))
             {
-                if (choice == 1)
+                switch (choice)
                 {
-                    AddStudent(students);
-                    continue;
-                }
-                else if (choice == 2)
-                {
-                    ShowStudent(students);
-                    continue;
-                }
-                else if (choice == 3)
-                {
-                    Console.WriteLine("Delete student");
-                    continue;
-                }
-                else if (choice == 4)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Application Stopped");
-                    Console.ResetColor();
-                    break;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid Input. Please try again.");
-                    Console.ResetColor();
-                    continue;
+                    case 1:
+                        AddStudent(students);
+                        continue;
+                    case 2:
+                        ShowStudent(students);
+                        continue;
+                    case 3:
+                        DeleteStudent(students);
+                        continue;
+                    case 4:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Application Stopped");
+                        Console.ResetColor();
+                        break;
                 }
             }
             else
@@ -60,7 +49,6 @@ class Program
     {
         Console.Write("please enter the name of the student:");
         string? name = Console.ReadLine();
-
         if (!string.IsNullOrWhiteSpace(name))
         {
             int inputAge;
@@ -69,7 +57,7 @@ class Program
                 Console.Write("Please enter his age:");
                 if (int.TryParse(Console.ReadLine(), out inputAge))
                 {
-                    if (inputAge < 5)
+                    if (inputAge <= 5)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Age must be higher than 5 years old. Please try again.");
@@ -144,9 +132,47 @@ class Program
     }
     public static void DeleteStudent(List<Student> studentslist)
     {
-
+        if (studentslist.Count() == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("No students are available to delete");
+            Console.ResetColor();
+            return;
+        }
+        string? name;
+        while (true)
+        {
+            Console.Write("Please enter the name of the student:");
+            name = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                var studenttodelete = studentslist.Where(n => n.Name.Equals(name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+                if (studenttodelete != null)
+                {
+                    studentslist.Remove(studenttodelete);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("student deleted succesfully");
+                    Console.ResetColor();
+                    break;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Name not found. Please try again.");
+                    Console.ResetColor();
+                    continue;
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid input");
+                Console.ResetColor();
+                continue;
+            }
+        }
     }
-    static void Main()
+    static void Main(string[] args)
     {
         PrintMenu();
     }

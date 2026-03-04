@@ -2,7 +2,7 @@ namespace StudentManagementSystem.Models
 {
 	class Student
 	{
-		private string name;
+		private string? name;
 		private int age;
 		private double grade;
 
@@ -13,7 +13,7 @@ namespace StudentManagementSystem.Models
 			this.grade = grade;
 		}
 
-		public string Name { get { return name; } }
+		public string? Name { get { return name; } }
 		public int Age { get { return age; } }
 		public double Grade { get { return grade; } }
 
