@@ -49,9 +49,11 @@ class Program
                 }
             }
             else
+            {
                 Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Invalid input. Please try again.");
-            Console.ResetColor();
+                Console.WriteLine("Invalid input. Please try again.");
+                Console.ResetColor();
+            }
         }
     }
     public static void AddStudent(List<Student> studentslist)

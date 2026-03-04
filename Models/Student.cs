@@ -4,9 +4,9 @@ namespace StudentManagementSystem.Models
 	{
 		private string name;
 		private int age;
-		private string grade;
+		private double grade;
 
-		public Student(string name, int age, string grade)
+		public Student(string name, int age, double grade)
 		{
 			this.name = name;
 			this.age = age;
@@ -15,7 +15,7 @@ namespace StudentManagementSystem.Models
 
 		public string Name { get { return name; } }
 		public int Age { get { return age; } }
-		public string Grade { get { return grade; } }
+		public double Grade { get { return grade; } }
 
 		public void PrintInfo()
 		{
