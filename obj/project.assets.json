@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DEPI\\StudentManagementSystem\\StudentManagementSystem.csproj",
+      "projectUniqueName": "C:\\Users\\abdu2\\DEPI-MiniProject1\\StudentManagementSystem.csproj",
       "projectName": "StudentManagementSystem",
-      "projectPath": "C:\\DEPI\\StudentManagementSystem\\StudentManagementSystem.csproj",
+      "projectPath": "C:\\Users\\abdu2\\DEPI-MiniProject1\\StudentManagementSystem.csproj",
       "packagesPath": "C:\\Users\\abdu2\\.nuget\\packages\\",
-      "outputPath": "C:\\DEPI\\StudentManagementSystem\\obj\\",
+      "outputPath": "C:\\Users\\abdu2\\DEPI-MiniProject1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\abdu2\\AppData\\Roaming\\NuGet\\NuGet.Config"
