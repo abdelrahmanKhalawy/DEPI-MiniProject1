@@ -88,6 +88,11 @@ class Program
                         ShowError("Age must be higher than 5 years old. Please try again.");
                         continue;
                     }
+                    else if (inputAge > 120)
+                    {
+                        ShowError("Invalid age. Please enter a value between 5 and 120. Please try again.");
+                        continue;
+                    }
                     else
                         break;
                 }
