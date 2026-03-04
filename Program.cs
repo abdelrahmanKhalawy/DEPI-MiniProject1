@@ -6,43 +6,73 @@ using StudentManagementSystem.Models;
 
 class Program
 {
+    public static void ShowError(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("\n-----------------------------------");
+        Console.WriteLine("ERROR: " + message);
+        Console.WriteLine("-----------------------------------");
+        Console.ResetColor();
+    }
+
     public static void PrintMenu()
     {
         List<Student> students = new List<Student>();
+
         while (true)
         {
-            Console.WriteLine("Please select an option:");
-            Console.WriteLine("1- Add Student");
-            Console.WriteLine("2- Show Students");
-            Console.WriteLine("3- Delete a Student");
-            Console.WriteLine("4- Exit");
-            Console.Write("Choose:");
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("=======================================");
+            Console.WriteLine("        STUDENT MANAGEMENT SYSTEM      ");
+            Console.WriteLine("=======================================");
+            Console.ResetColor();
+
+            Console.WriteLine();
+            Console.WriteLine("1) Add Student");
+            Console.WriteLine("2) Show Students");
+            Console.WriteLine("3) Delete Student");
+            Console.WriteLine("4) Exit");
+            Console.WriteLine();
+            Console.Write("Select an option (1-4): ");
+
             if (int.TryParse(Console.ReadLine(), out int choice))
             {
+                Console.Clear();
+
                 switch (choice)
                 {
                     case 1:
                         AddStudent(students);
-                        continue;
+                        break;
+
                     case 2:
                         ShowStudent(students);
-                        continue;
+                        break;
+
                     case 3:
                         DeleteStudent(students);
-                        continue;
+                        break;
+
                     case 4:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Application Stopped");
+                        Console.WriteLine("\nApplication Stopped.");
                         Console.ResetColor();
+                        return;
+
+                    default:
+                        ShowError("Invalid choice. Please select from 1 to 4.");
                         break;
                 }
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid input. Please try again.");
-                Console.ResetColor();
+                ShowError("Invalid input. Please enter a number.");
             }
+
+            Console.WriteLine("\nPress any key to return to menu...");
+            Console.ReadKey();
         }
     }
     public static void AddStudent(List<Student> studentslist)
@@ -81,10 +111,10 @@ class Program
                 Console.Write("Please enter his grade:");
                 if (double.TryParse(Console.ReadLine(), out grade))
                 {
-                    if (grade < 0)
+                    if (grade < 0 || grade > 100)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("How can a grade be less than zero? Please try again.");
+                        Console.WriteLine("Grade Can Be between 0 and 100! Please try again.");
                         Console.ResetColor();
                         continue;
                     }
@@ -114,22 +144,23 @@ class Program
     }
     public static void ShowStudent(List<Student> studentslist)
     {
-
         if (studentslist.Count == 0)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("There are no students to show stats");
-            Console.ResetColor();
+            ShowError("There are no students to display.");
             return;
         }
+
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Student list: ");
+        Console.WriteLine("=========== STUDENT LIST ===========\n");
+        Console.ResetColor();
+
         foreach (Student s in studentslist)
         {
             s.PrintInfo();
+            Console.WriteLine("-----------------------------------");
         }
-        Console.ResetColor();
     }
+
     public static void DeleteStudent(List<Student> studentslist)
     {
         if (studentslist.Count() == 0)
