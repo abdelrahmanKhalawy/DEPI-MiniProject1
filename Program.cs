@@ -3,7 +3,7 @@
 class Program
 {
 
-    DatabaseHelper db = new DatabaseHelper();  //maryam
+    DatabaseHelper db = new DatabaseHelper();
 
 
     public static void ShowError(string message)
@@ -142,15 +142,6 @@ class Program
     }
     public static void ShowStudent(List<Student> studentslist)
     {
-        //maryam
-        // i made the program read the students from the database instead of the list because the list is only used to store the students during the runtime of the program .
-        /*  if (studentslist.Count == 0)
-          {
-              ShowError("There are no students to display.");
-              return;
-          }*/
-
-
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("============ STUDENT LIST ===========\n ");
         Console.ResetColor();
@@ -173,40 +164,39 @@ class Program
             Console.WriteLine("----------------------------------------");
         }
     }
+
     public static void DeleteStudent(List<Student> studentslist)
     {
-        if (studentslist.Count() == 0)
-        {
-            ShowError("No students are available to delete");
-            return;
-        }
-        string? name;
+        DatabaseHelper db = new DatabaseHelper();
+
         while (true)
         {
-            Console.Write("Please enter the name of the student:");
-            name = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(name))
+            Console.Write("Please enter the name of the student: ");
+            string? name = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(name))
             {
-                var studenttodelete = studentslist.Where(n => n.Name.Equals(name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
-                if (studenttodelete != null)
-                {
-                    studentslist.Remove(studenttodelete);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("student deleted succesfully ");
-                    Console.ResetColor();
-                    break;
-                }
-                else
-                {
-                    ShowError("Name not found. Please try again.");
-                    continue;
-                }
-            }
-            else
-            {
-                ShowError("Invalid input ");
+                ShowError("Invalid input. Please enter a valid name.");
                 continue;
             }
+
+            List<Student> studentsFromDB = db.GetStudentsFromDB();
+
+            var studentToDelete = studentsFromDB
+                .FirstOrDefault(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+            if (studentToDelete == null)
+            {
+                ShowError("Name not found. Please try again.");
+                continue;
+            }
+
+            db.DeleteStudentFromDB(name);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Student deleted successfully.");
+            Console.ResetColor();
+            break;
         }
     }
 
