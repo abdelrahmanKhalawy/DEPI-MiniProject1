@@ -2,6 +2,10 @@
 
 class Program
 {
+
+    DatabaseHelper db = new DatabaseHelper();  //maryam
+
+
     public static void ShowError(string message)
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -123,6 +127,10 @@ class Program
             }
             Student student = new Student(name, inputAge, grade);
             studentslist.Add(student);
+
+            DatabaseHelper db = new DatabaseHelper();  //maryam
+            db.AddStudentToDB(name, inputAge, grade);  //maryam
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Student added successfully ");
             Console.ResetColor();
@@ -134,17 +142,30 @@ class Program
     }
     public static void ShowStudent(List<Student> studentslist)
     {
-        if (studentslist.Count == 0)
-        {
-            ShowError("There are no students to display.");
-            return;
-        }
+        //maryam
+        // i made the program read the students from the database instead of the list because the list is only used to store the students during the runtime of the program .
+        /*  if (studentslist.Count == 0)
+          {
+              ShowError("There are no students to display.");
+              return;
+          }*/
+
 
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("============ STUDENT LIST ===========\n ");
         Console.ResetColor();
 
-        foreach (Student s in studentslist)
+        DatabaseHelper db = new DatabaseHelper();  //maryam
+        List<Student> studentsFromDB = db.GetStudentsFromDB();  //maryam
+        //maryam
+        //this one is the replacement of the one i commented out above.
+        if (studentsFromDB.Count == 0)
+        {
+            ShowError("There are no students to display.");
+            return;
+        }
+
+        foreach (Student s in studentsFromDB) //maryam
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             s.PrintInfo();

@@ -1,16 +1,68 @@
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
+using StudentManagementSystem.Models;
+using System.Data;
+using System.Diagnostics;
+
 
 class DatabaseHelper
 {
-	private string connectionString = "Server=.;Database=StudentDB;Trusted_Connection=True;";
+    private string connectionString = "Server=MARYAM;Database=StudentDB;Trusted_Connection=True;TrustServerCertificate=True;";
 
-	public void AddStudentToDB(string name, int age, string grade)
-	{
-		// هنا بعدين هتحط الكود اللي ينادي الـ Stored Procedure
-	}
+    public void AddStudentToDB(string name, int age, double grade)
+    {
+        // هنا بعدين هتحط الكود اللي ينادي الـ Stored Procedure
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("AddStudent", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@St_Name", name);
+                    command.Parameters.AddWithValue("@Age", age);
+                    command.Parameters.AddWithValue("@Grade", grade.ToString());
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Student added successfully to the database.");
+                }
+            }
 
-	public void GetStudentsFromDB()
-	{
-		// هنا بعدين هتحط الكود اللي يجيب كل الطلاب من الداتا بيز
-	}
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+
+    public List<Student> GetStudentsFromDB()
+    {
+        // هنا بعدين هتحط الكود اللي يجيب كل الطلاب من الداتا بيز
+        List<Student> students = new List<Student>();
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM view_Students";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string name = reader["St_Name"].ToString();
+                        int age = Convert.ToInt32(reader["Age"]);
+                        double grade = Convert.ToDouble(reader["Grade"]);
+                        students.Add(new Student(name, age, grade));
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+
+        return students;
+    }
 }
