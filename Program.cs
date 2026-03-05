@@ -141,7 +141,7 @@ class Program
         }
 
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("============ STUDENT LIST ============\n ");
+        Console.WriteLine("=========== STUDENT LIST ==========\n ");
         Console.ResetColor();
 
         foreach (Student s in studentslist)
@@ -149,7 +149,7 @@ class Program
             Console.ForegroundColor = ConsoleColor.Yellow;
             s.PrintInfo();
             Console.ResetColor();
-            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("---------------------------------------");
         }
     }
 
