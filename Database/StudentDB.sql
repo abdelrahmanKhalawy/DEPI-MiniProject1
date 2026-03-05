@@ -3,7 +3,7 @@ GO
 
 USE StudentDB;
 Create Table Students
-( 
+(
 ID int primary key Identity(1,1) ,
 St_NAME varchar(100) not null,
 Age int not null ,
@@ -33,7 +33,10 @@ DELETE FROM Students
 WHERE St_NAME = @St_Name
 END
 
-EXEC AddStudent 'shahd',21,90;
+EXEC AddStudent 'shahd',21,100;
+EXEC AddStudent 'Abdelrahman',21,100;
+EXEC AddStudent 'Baher',21,100;
+EXEC AddStudent 'Naglaa',21,100;
 
  Select * From view_Students;
  SELECT * FROM Students;
