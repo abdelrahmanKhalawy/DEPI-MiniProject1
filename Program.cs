@@ -20,11 +20,10 @@ class Program
             Console.Clear();
 
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("=======================================");
-            Console.WriteLine("        STUDENT MANAGEMENT SYSTEM      ");
-            Console.WriteLine("=======================================");
+            Console.WriteLine("=========================================");
+            Console.WriteLine("        STUDENT MANAGEMENT SYSTEM        ");
+            Console.WriteLine("=========================================");
             Console.ResetColor();
-
             Console.WriteLine();
             Console.WriteLine("1) Add Student");
             Console.WriteLine("2) Show Students");
@@ -98,7 +97,7 @@ class Program
                 }
                 else
                 {
-                    ShowError("invalid age input. Please try again");
+                    ShowError("invalid age input. Please try again ");
                     continue;
                 }
             }
@@ -110,7 +109,7 @@ class Program
                 {
                     if (grade < 0 || grade > 100)
                     {
-                        ShowError("Grade Can Be between 0 and 100! Please try again.");
+                        ShowError("Grade Can Be between 0 and 100! Please try again. ");
                         continue;
                     }
                     else
@@ -118,19 +117,19 @@ class Program
                 }
                 else
                 {
-                    ShowError("invalid grade input. Please try again");
+                    ShowError("invalid grade input. Please try again ");
                     continue;
                 }
             }
             Student student = new Student(name, inputAge, grade);
             studentslist.Add(student);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Student added successfully");
+            Console.WriteLine("Student added successfully ");
             Console.ResetColor();
         }
         else
         {
-            ShowError("Invalid name input. Please try again.");
+            ShowError("Invalid name input. Please try again. ");
         }
     }
     public static void ShowStudent(List<Student> studentslist)
@@ -142,7 +141,7 @@ class Program
         }
 
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("=========== STUDENT LIST ===========\n");
+        Console.WriteLine("============ STUDENT LIST ============\n ");
         Console.ResetColor();
 
         foreach (Student s in studentslist)
@@ -185,7 +184,7 @@ class Program
             }
             else
             {
-                ShowError("Invalid input");
+                ShowError("Invalid input ");
                 continue;
             }
         }
