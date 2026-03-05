@@ -1,3 +1,6 @@
 ﻿/.vs/StudentManagementSystem
 /bin
-/DEPI-MiniProject1/obj
+/obj
+/obj/Debug
+/obj/Debug/ref
+/obj/Debug/refint
