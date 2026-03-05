@@ -46,9 +46,9 @@ class Program
                         ShowStudent(students);
                         break;
 
-                    //case 3:
-                    //    DeleteStudent(students);
-                    //    break;
+                    case 3:
+                        DeleteStudent(students);
+                        break;
 
                     case 4:
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -150,6 +150,42 @@ class Program
             s.PrintInfo();
             Console.ResetColor();
             Console.WriteLine("---------------------------------------");
+        }
+    }
+    public static void DeleteStudent(List<Student> studentslist)
+    {
+        if (studentslist.Count() == 0)
+        {
+            ShowError("No students are available to delete");
+            return;
+        }
+        string? name;
+        while (true)
+        {
+            Console.Write("Please enter the name of the student:");
+            name = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                var studenttodelete = studentslist.Where(n => n.Name.Equals(name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+                if (studenttodelete != null)
+                {
+                    studentslist.Remove(studenttodelete);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("student deleted succesfully");
+                    Console.ResetColor();
+                    break;
+                }
+                else
+                {
+                    ShowError("Name not found. Please try again.");
+                    continue;
+                }
+            }
+            else
+            {
+                ShowError("Invalid input ");
+                continue;
+            }
         }
     }
 
