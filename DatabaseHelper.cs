@@ -6,8 +6,8 @@ using System.Diagnostics;
 
 class DatabaseHelper
 {
-	private string connectionString = "Server=.;Database=StudentDB;Trusted_Connection=True;TrustServerCertificate=True;";
-	public void AddStudentToDB(string name, int age, double grade)
+    private string connectionString = "Server=MARYAM;Database=StudentDB;Trusted_Connection=True;TrustServerCertificate=True;";
+    public void AddStudentToDB(string name, int age, double grade)
 	{
 		try
 		{
@@ -21,7 +21,9 @@ class DatabaseHelper
 					command.Parameters.AddWithValue("@Age", age);
 					command.Parameters.AddWithValue("@Grade", grade);
 					command.ExecuteNonQuery();
-					Console.WriteLine("Student added successfully to the database.");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Student added successfully to the database. ");
+                    Console.ResetColor();
 				}
 			}
 
@@ -29,8 +31,10 @@ class DatabaseHelper
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine($"An error occurred: {ex.Message}");
-		}
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.ResetColor();
+        }
 	}
 
 	public List<Student> GetStudentsFromDB()
@@ -57,8 +61,10 @@ class DatabaseHelper
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine($"An error occurred: {ex.Message}");
-		}
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.ResetColor();
+        }
 
 		return students;
 	}
@@ -77,13 +83,20 @@ class DatabaseHelper
 					command.Parameters.AddWithValue("@St_Name", name);
 
 					command.ExecuteNonQuery();
-					Console.WriteLine("Student deleted from database.");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Student deleted successfully from the database.");
+                    Console.ResetColor();
+                   
 				}
 			}
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.ResetColor();
+            
+           
 		}
 	}
 

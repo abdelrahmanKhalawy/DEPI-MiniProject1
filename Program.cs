@@ -131,9 +131,7 @@ class Program
             DatabaseHelper db = new DatabaseHelper();  //maryam
             db.AddStudentToDB(name, inputAge, grade);  //maryam
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Student added successfully ");
-            Console.ResetColor();
+            
         }
         else
         {
@@ -192,10 +190,6 @@ class Program
             }
 
             db.DeleteStudentFromDB(name);
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Student deleted successfully.");
-            Console.ResetColor();
             break;
         }
     }
