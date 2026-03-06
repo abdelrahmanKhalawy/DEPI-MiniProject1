@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 class DatabaseHelper
 {
-    private string connectionString = "Server=MARYAM;Database=StudentDB;Trusted_Connection=True;TrustServerCertificate=True;";
+    private string connectionString = "Server=.;Database=StudentDB;Trusted_Connection=True;TrustServerCertificate=True;";
     public void AddStudentToDB(string name, int age, double grade)
 	{
 		try
